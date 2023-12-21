@@ -10,7 +10,6 @@ export abstract class GameObject {
         this.x = x;
         this.y = y;
     }
-    abstract draw(ctx: CanvasRenderingContext2D): void;
     abstract getBoundingBox(): BoundingBox;
 
     /**
@@ -30,8 +29,8 @@ export abstract class GameObject {
      * @param obj
      * @returns boolean
      */
-    intersects(obj: GameObject): boolean {
-        const { topLeft: pMinA, bottomRight: pMaxA } = obj.getBoundingBox();
+    intersects(box: BoundingBox): boolean {
+        const { topLeft: pMinA, bottomRight: pMaxA } = box;
         const { topLeft: pMinB, bottomRight: pMaxB } = this.getBoundingBox();
 
         const a = pMaxA[0] < pMinB[0];

@@ -1,3 +1,30 @@
 .start-button {
     width: 80px;
 }
+
+.lose-message {
+    position: absolute;
+    left: 50%;
+}
+
+.p1-score {
+    position: absolute;
+    left: 75%;
+    font-size: 2.5em;
+}
+
+.p2-score {
+    position: absolute;
+    left: 25%;
+    font-size: 2.5em;
+}
+
+.game-canvas {
+    background: #15171a;
+}
+
+.instructions {
+    display: inline-block;
+    padding-left: 1.5em;
+    margin: 0;
+}

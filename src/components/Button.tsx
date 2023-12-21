@@ -1,11 +1,10 @@
 import { MouseEventHandler } from "react";
-import "./components.css";
 
-export const Button = ({ onClick }: { onClick: MouseEventHandler }) => {
+export const Button = ({ onClick, label }: { onClick: MouseEventHandler, label: string }) => {
     return (
         <>
-            <button onClick={onClick} className="start-button">
-                Start
+            <button onClick={onClick}>
+                {label}
             </button>
         </>
     );

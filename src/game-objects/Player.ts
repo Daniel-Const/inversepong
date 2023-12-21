@@ -7,6 +7,7 @@ export default class Player {
     motionHandler;
     upKey;
     downKey;
+    score;
     constructor(
         startX: number,
         startY: number,
@@ -27,6 +28,7 @@ export default class Player {
         };
         this.upKey = upKey;
         this.downKey = downKey;
+        this.score = 0;
     }
 
     /**

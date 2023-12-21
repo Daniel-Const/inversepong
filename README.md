@@ -2,6 +2,8 @@
 
 The paddles are in the middle and the ball wraps around the screen edges.
 
+![alt text](./public/demo.png)
+
 ## Get started
 
 ```bash
@@ -14,3 +16,9 @@ The paddles are in the middle and the ball wraps around the screen edges.
 
 A fun little side project to keep me busy.
 Stay tuned!
+
+## TODO:
+
+- Better collision handling (gets stuck on corners)
+- Revisit ball teleportation logic
+- Testing + Documentation

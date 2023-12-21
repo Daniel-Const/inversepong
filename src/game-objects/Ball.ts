@@ -20,10 +20,10 @@ export default class Ball extends GameObject {
         super(x, y);
         this.radius = radius;
 
-        this.dxDefault = 8;
-        this.dyDefault = -2;
+        this.dxDefault = -10;
+        this.dyDefault = 0;
         this.dxMax = 10;
-        this.dyMax = 8;
+        this.dyMax = 10;
 
         this.dx = 0;
         this.dy = 0;
@@ -32,16 +32,18 @@ export default class Ball extends GameObject {
         this.momentumTransfer = 0.6;
     }
 
-    startMoving() {
-        this.dx = this.dxDefault;
+    startMoving(servePlayer: number, paddleDy: number) {
+        // dx direction depends on player turn
+        this.dx = this.dxDefault * (servePlayer == 0 ? 1 : -1);
+
+        // Add momentum from paddle
         this.dy = this.dyDefault;
+        this.dy = this.getDyWithPaddleMomentum(paddleDy);
     }
 
-    draw(ctx: CanvasRenderingContext2D) {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
-        ctx.fillStyle = this.color;
-        ctx.fill();
+    getDyWithPaddleMomentum(paddleDy: number): number {
+        const dy = this.dy + paddleDy * this.momentumTransfer;
+        return Math.abs(dy) > this.dyMax ? this.dyMax * Math.sign(dy) : dy;
     }
 
     move(boundX: number, boundY: number, paddles: Paddle[]) {
@@ -50,17 +52,14 @@ export default class Ball extends GameObject {
 
         // Hit a paddle
         paddles.forEach((paddle: Paddle) => {
-            if (this.intersects(paddle)) {
+            if (this.intersects(paddle.getBoundingBox())) {
                 // Update velocities
                 this.dx *= -1;
-                this.dy = this.dy + paddle.dy * this.momentumTransfer;
-                this.dy =
-                    Math.abs(this.dy) > this.dyMax
-                        ? this.dyMax * Math.sign(this.dy)
-                        : this.dy;
+
+                this.dy = this.getDyWithPaddleMomentum(paddle.dy);
 
                 // Update position
-                this.x += Math.sign(this.dx) * 3;
+                this.x += Math.sign(this.dx);
                 return;
             }
         });

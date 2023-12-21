@@ -1,7 +1,10 @@
-import game from "./Game";
+import Player from "../game-objects/Player";
 
-const initKeyEventHandlers = () => {
-    game.players.forEach((player) => {
+const initKeyEventHandlers = (
+    players: Player[],
+    startRoundCallback: () => void
+) => {
+    players.forEach((player) => {
         document.addEventListener("keydown", (event) => {
             if (event.key === player.upKey) {
                 player.motionHandler.isMovingUp = true;
@@ -19,6 +22,10 @@ const initKeyEventHandlers = () => {
                 player.motionHandler.isMovingDown = false;
             }
         });
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "g") startRoundCallback();
     });
 };
 

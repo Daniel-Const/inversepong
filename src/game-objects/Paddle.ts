@@ -23,16 +23,6 @@ class Paddle extends GameObject {
     }
 
     /**
-     * Draw the paddle object onto the canvas
-     *
-     * @param ctx
-     */
-    draw(ctx: CanvasRenderingContext2D) {
-        ctx.fillStyle = this.color;
-        ctx.fillRect(this.x, this.y, this.width, this.height);
-    }
-
-    /**
      * Move the paddle y pos by its veolcity dy
      * Handle boundary checking logic
      *
