@@ -66,22 +66,18 @@ export default class Ball extends GameObject {
 
         if (this.x > boundX) {
             this.x = this.radius;
-            this.y = boundY - this.y;
         }
 
         if (this.x < 0 - this.radius) {
             this.x = boundX - this.radius;
-            this.y = boundY - this.y;
         }
 
         if (this.y > boundY) {
-            this.y = 0 - this.radius;
-            this.x = boundX - this.x;
+            this.dy *= -1;
         }
 
         if (this.y < 0 - this.radius) {
-            this.y = boundY - this.radius;
-            this.x = boundX - this.x;
+            this.dy *= -1;
         }
     }
 

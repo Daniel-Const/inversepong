@@ -7,7 +7,6 @@ import initKeyEventHandlers from "../game/keyEvents";
 import game from "../game/Game";
 import { drawBackground, drawBoundaryLine } from "../render/environment";
 import { Button } from "./Button";
-import { LoseMessage } from "./LoseMessage";
 import { Score } from "./Score";
 import { drawBall, drawPaddle } from "../render/objects";
 import "./components.css";
@@ -92,8 +91,6 @@ const Canvas = () => {
             <div className="p2-score">
                 <Score score={p2Score}></Score>
             </div>
-
-            <LoseMessage show={false}></LoseMessage>
             <canvas
                 className="game-canvas"
                 height={innerHeight}

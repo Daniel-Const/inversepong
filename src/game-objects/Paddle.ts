@@ -16,7 +16,7 @@ class Paddle extends GameObject {
     ) {
         super(x, y);
         this.dy = 0;
-        this.dyDefault = 9;
+        this.dyDefault = 8.5;
         this.width = width;
         this.height = height;
         this.color = "white";
