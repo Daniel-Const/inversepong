@@ -6,10 +6,11 @@ import { useEffect, useRef, useState } from "react";
 import initKeyEventHandlers from "../game/keyEvents";
 import game from "../game/Game";
 import { drawBackground, drawBoundaryLine } from "../render/environment";
-import { Button } from "./Button";
 import { Score } from "./Score";
 import { drawBall, drawPaddle } from "../render/objects";
 import "./components.css";
+import { Menu } from "./Menu";
+import { MenuToggle } from "./MenuToggle";
 
 const resetGame = (
     setP1Score: React.Dispatch<React.SetStateAction<number>>,
@@ -30,6 +31,7 @@ const Canvas = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [p1Score, setP1Score] = useState(0);
     const [p2Score, setP2Score] = useState(0);
+    const [toggleMenu, setToggleMenu] = useState(true);
 
     initKeyEventHandlers(game.players, startNewRound);
 
@@ -75,28 +77,32 @@ const Canvas = () => {
 
     return (
         <>
-            <Button
-                onClick={() => {
-                    resetGame(setP1Score, setP2Score);
-                }}
-                label="New Game"
-            />
-            <Button onClick={startNewRound} label="Next Round" />
-            <p className="instructions">
-                Player 1: 'w', 's' | Player 2: 'o', 'l' | Start round: g
-            </p>
-            <div className="p1-score">
-                <Score score={p1Score}></Score>
+            <div className="game-window">
+                <MenuToggle
+                    toggleMenu={toggleMenu}
+                    setToggleMenu={setToggleMenu}
+                ></MenuToggle>
+                {toggleMenu && (
+                    <Menu
+                        onNewGame={() => {
+                            resetGame(setP1Score, setP2Score);
+                            setToggleMenu(false);
+                        }}
+                    ></Menu>
+                )}
+                <div className="p1-score">
+                    <Score score={p1Score}></Score>
+                </div>
+                <div className="p2-score">
+                    <Score score={p2Score}></Score>
+                </div>
+                <canvas
+                    className="game-canvas"
+                    height={innerHeight}
+                    width={innerWidth}
+                    ref={canvasRef}
+                />
             </div>
-            <div className="p2-score">
-                <Score score={p2Score}></Score>
-            </div>
-            <canvas
-                className="game-canvas"
-                height={innerHeight}
-                width={innerWidth}
-                ref={canvasRef}
-            />
         </>
     );
 };
